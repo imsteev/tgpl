@@ -29,4 +29,10 @@ func main() {
 	fmt.Println(comma("-1.707"))
 	fmt.Println(comma("+10101.707"))
 
+	fmt.Println(anagram("", ""))
+	fmt.Println(anagram("1", ""))
+	fmt.Println(anagram("1", "1"))
+	fmt.Println(anagram("12", "21"))
+	fmt.Println(anagram("123", "3211"))
+	fmt.Println(anagram("1231", "3211")) // true
 }
