@@ -1,4 +1,4 @@
-package ch3
+package main
 
 import (
 	"bytes"
@@ -6,26 +6,16 @@ import (
 
 // comma accepts a non-negative, decimal integer string
 // it will return the string formatted with commas
-
-// THIS CAN BE DONE WITH MODULO %
-
-// 1234 ->   [1   , 234]
-// 12345 ->  [12  , 345]
-// 123456 -> [123 , 456]
 func comma(s string) string {
-	if len(s) < 3 {
-		return s
+	// break off chunks that should have a comma in front
+	firstChunkSize := len(s)
+	for firstChunkSize > 3 {
+		firstChunkSize -= 3
 	}
-	var b bytes.Buffer
 
-	// get first group
-	r := len(s) % 3
-	if r != 0 {
-		b.WriteString(s[:r])
-	} else {
-		b.WriteString(s[:3])
-	}
-	for i := b.Len(); i < len(s); i += 3 {
+	var b bytes.Buffer
+	b.WriteString(s[:firstChunkSize])
+	for i := firstChunkSize; i < len(s); i += 3 {
 		b.WriteString(",")
 		b.WriteString(s[i : i+3])
 	}
