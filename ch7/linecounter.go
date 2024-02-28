@@ -2,17 +2,20 @@ package ch7
 
 import (
 	"bufio"
-	"strings"
+	"bytes"
 )
 
 // LineCounter implements io.Writer
 type LineCounter int
 
+// Write will increment the line count stored at the address of the variable.
 func (lc *LineCounter) Write(b []byte) (int, error) {
+	var (
+		buf  = bytes.NewBuffer(b)
+		scnr = bufio.NewScanner(buf)
+	)
 	var ct int
-	r := strings.NewReader(string(b))
-	scanner := bufio.NewScanner(r)
-	for scanner.Scan() {
+	for scnr.Scan() {
 		ct++
 	}
 	*lc = LineCounter(ct)
