@@ -24,6 +24,12 @@ func (s *IntSet) Add(x int) {
 	s.words[word] |= (1 << bit)
 }
 
+func (s *IntSet) AddAll(xs ...int) {
+	for _, x := range xs {
+		s.Add(x)
+	}
+}
+
 func (s *IntSet) UnionWith(t *IntSet) {
 	for i, tw := range t.words {
 		if i < len(s.words) {
@@ -45,8 +51,6 @@ func (s *IntSet) String() string {
 		for j := 0; j < 64; j++ {
 			if word&(1<<uint(j)) != 0 {
 				if buf.Len() > len("{") {
-					fmt.Println(word)
-
 					buf.WriteByte(' ')
 				}
 				fmt.Fprintf(&buf, "%d", 64*i+j)
@@ -89,18 +93,16 @@ func (s *IntSet) Copy() *IntSet {
 
 func main() {
 	var x, y IntSet
-	x.Add(1)
-	x.Add(144)
-	x.Add(9)
+	x.AddAll(1, 144, 9)
 	fmt.Println(x.String())
-	y.Add(9)
-	y.Add(42)
+	y.AddAll(9, 42)
 	fmt.Println(y.String())
 	x.UnionWith(&y)
 	fmt.Println(x.String())
 	fmt.Println(x.Has(9), x.Has(123), x.Has(42))
 	t := x.Copy()
 	t.Add(555)
+	fmt.Println(t.String())
 	t.Remove(9)
 	fmt.Println(x.Has(555), t.Has(555), x.Has(9), t.Has(9))
 }
