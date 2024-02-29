@@ -11,9 +11,10 @@ func main() {
 	// h2.Write([]byte("world"))
 	// assert.Equal(2, countDifferentBits(h1.Sum(nil), h2.Sum(nil)))
 
-	x := []int{1, 2, 3, 4, 5, 6, 7}
-	fmt.Println(x)
-	fmt.Println(rotate(x, 6))
-	fmt.Println(x)
+	s := []int{1, 2, 3, 4, 5, 6, 7}
+	fmt.Println("original:", s)
+	for i := range s {
+		fmt.Printf("rotations: %d > %v\n", i+1, rotate(s, i+1))
+	}
 
 }
