@@ -1,4 +1,0 @@
-7.1 - page 173
-
-Using the ideas from ByteCounter, implement counters for words and for lines.
-You will find bufio.ScanWords useful.
