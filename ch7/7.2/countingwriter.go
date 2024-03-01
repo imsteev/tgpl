@@ -1,9 +1,6 @@
-package ch7
+package countingwriter
 
 import "io"
-
-// 7.2: Write a function CountingWriter that will return a writer, as well as a
-// pointer to an int64 that holds how many bytes have been written at any given time.
 
 // strategy:
 // something writes

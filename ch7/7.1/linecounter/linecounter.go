@@ -1,4 +1,4 @@
-package ch7
+package linecounter
 
 import (
 	"bufio"
