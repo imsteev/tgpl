@@ -6,8 +6,8 @@ import "io"
 // something writes
 // some state is held about bytes written from inner writer
 type WriteCounter struct {
-	bytesWritten int64
-	writer       io.Writer
+	count  int64
+	writer io.Writer
 }
 
 func (c *WriteCounter) Write(p []byte) (int, error) {
@@ -15,11 +15,11 @@ func (c *WriteCounter) Write(p []byte) (int, error) {
 	if err != nil {
 		return 0, err
 	}
-	c.bytesWritten += int64(n)
+	c.count += int64(n)
 	return n, nil
 }
 
 func CountingWriter(w io.Writer) (io.Writer, *int64) {
 	wc := &WriteCounter{writer: w}
-	return wc, &wc.bytesWritten
+	return wc, &wc.count
 }
